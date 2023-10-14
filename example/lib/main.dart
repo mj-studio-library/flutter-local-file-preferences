@@ -24,6 +24,9 @@ class LocalFileCounter with LocalFilePrefMixin<int> {
   Map<String, dynamic> toJson() {
     return {'value': value};
   }
+
+  @override
+  Duration get throttleDuration => const Duration(milliseconds: 1);
 }
 
 class MyApp extends StatelessWidget {
@@ -53,10 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _counter = LocalFileCounter();
 
   void _incrementCounter() {
-    setState(() {
-      _counter.value += 1;
-    });
-    _counter.scheduleSave();
+    _counter.value += 1;
   }
 
   @override
@@ -73,10 +73,14 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '${_counter.value}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            ValueListenableBuilder(
+                valueListenable: _counter,
+                builder: (context, value, _) {
+                  return Text(
+                    '$value',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  );
+                }),
           ],
         ),
       ),

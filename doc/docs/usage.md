@@ -2,6 +2,10 @@
 sidebar_position: 2
 ---
 
+# Note
+
+- If a class mixed in with `LocalFilePrefMixin`, then it can be used as `ValueNotifier`. `LocalFilePrevMixin` implements all `ValueNotifier` methods with internal `ValueNotifier` delegate.
+
 # Usage
 
 ## 1. Register global `Storage`

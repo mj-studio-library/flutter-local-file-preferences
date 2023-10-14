@@ -7,14 +7,22 @@ import 'storage/storage.dart';
 import 'throttler.dart';
 import 'util/register.dart';
 
-mixin LocalFilePrefMixin<T> {
+mixin LocalFilePrefMixin<T> implements ValueNotifier<T> {
   late final JsonFile _file = JsonFile(fileName, storage);
-  final Throttler _throttle = Throttler(const Duration(seconds: 2));
+  late final Throttler _throttle = Throttler(throttleDuration);
+  late final ValueNotifier<T> _notifier = ValueNotifier<T>(load());
 
-  late final ValueNotifier<T> data = ValueNotifier<T>(load())
-    ..addListener(scheduleSave);
-  T get value => data.value;
-  set value(T value) => data.value = value;
+  @override
+  T get value => _notifier.value;
+  @override
+  set value(T value) {
+    if (_notifier.value == value) {
+      return;
+    }
+    _notifier.value = value;
+    notifyListeners();
+    scheduleSave();
+  }
 
   T load() {
     try {
@@ -38,10 +46,28 @@ mixin LocalFilePrefMixin<T> {
 
   void scheduleSave() => _throttle.call(save);
 
-  /// Serialization
   Storage get storage => globalStorage!;
   String get fileName;
   T get fallback;
   Map<String, dynamic> toJson();
   T fromJson(Map<String, dynamic> json);
+  Duration get throttleDuration => const Duration(seconds: 2);
+
+  @override
+  void dispose() {
+    _notifier.dispose();
+  }
+
+  @override
+  void addListener(VoidCallback listener) => _notifier.addListener(listener);
+
+  @override
+  bool get hasListeners => _notifier.hasListeners;
+
+  @override
+  void notifyListeners() => _notifier.notifyListeners();
+
+  @override
+  void removeListener(VoidCallback listener) =>
+      _notifier.removeListener(listener);
 }
