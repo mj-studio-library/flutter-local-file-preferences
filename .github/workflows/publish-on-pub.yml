@@ -2,9 +2,9 @@ name: Publish package to pub.dev
 on:
   push:
     tags:
-      - v*
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
 jobs:
-  publish:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
         run: flutter analyze
       - name: Format
         run: dart format --set-exit-if-changed .
-      - name: Prepare pub credentials
-        run: mkdir -p $XDG_CONFIG_HOME/dart && echo '${{ secrets.PUB_CREDENTIALS }}' > "$XDG_CONFIG_HOME/dart/pub-credentials.json"
-      - name: Publish package
-        run: flutter pub publish --force
+  publish:
+    permissions:
+      id-token: write
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
