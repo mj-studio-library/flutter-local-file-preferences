@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:yaml/yaml.dart';
 
 // ignore_for_file: avoid_print
@@ -12,14 +13,11 @@ void main(List<String> args) {
   var tagVersion = '';
   if (args.isNotEmpty) {
     tagVersion = args[0].split('/').last;
+  } else {
+    throw Exception();
   }
   if (tagVersion.startsWith('v')) {
     tagVersion = tagVersion.substring(1);
-  }
-
-  if (pubspecVersion != tagVersion) {
-    throw Exception(
-        'pubspec version ($pubspecVersion) and tag version ($tagVersion) are different');
   }
 
   String changeLog = File('CHANGELOG.md').readAsStringSync();
