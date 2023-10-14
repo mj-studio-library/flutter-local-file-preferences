@@ -11,7 +11,8 @@ mixin LocalFilePrefMixin<T> {
   late final JsonFile _file = JsonFile(fileName, storage);
   final Throttler _throttle = Throttler(const Duration(seconds: 2));
 
-  late final ValueNotifier<T> data = ValueNotifier<T>(load())..addListener(scheduleSave);
+  late final ValueNotifier<T> data = ValueNotifier<T>(load())
+    ..addListener(scheduleSave);
   T get value => data.value;
   set value(T value) => data.value = value;
 
