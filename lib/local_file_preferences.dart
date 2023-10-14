@@ -1,7 +1,4 @@
-library local_file_preferences;
-
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/local_file_pref_mixin.dart' show LocalFilePrefMixin;
+export 'src/storage/shared_preferences_storage.dart';
+export 'src/storage/storage.dart';
+export 'src/util/register.dart';

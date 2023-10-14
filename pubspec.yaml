@@ -1,7 +1,8 @@
 name: local_file_preferences
-description: A new Flutter package project.
-version: 0.0.1
-homepage:
+description: This package provides local json file saving and Loading utility.
+version: 0.0.2
+homepage: https://mj-studio-library.github.io/flutter-local-file-preferences/
+repository: https://github.com/mj-studio-library/flutter-local-file-preferences
 
 environment:
   sdk: '>=3.1.3 <4.0.0'
@@ -10,11 +11,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
