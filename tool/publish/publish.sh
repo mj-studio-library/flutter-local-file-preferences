@@ -31,3 +31,6 @@ if [[ $? -ne 0 ]]; then
 fi
 git tag $tag
 git push origin $tag
+git add .
+git commit -m "[release] $tag" --allow-empty
+git push
