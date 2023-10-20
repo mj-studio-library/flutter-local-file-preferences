@@ -23,6 +23,7 @@ void main(List<String> args) {
   String changeLog = File('CHANGELOG.md').readAsStringSync();
   if (!changeLog.startsWith('## $tagVersion')) {
     throw Exception(
-        'CHANGELOG.md doesn\'t started with \'## $tagVersion\' tag version ($tagVersion)');
+      'CHANGELOG.md doesn\'t started with \'## $tagVersion\' tag version ($tagVersion)',
+    );
   }
 }
