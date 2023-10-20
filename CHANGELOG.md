@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Add topic
+
 ## 1.0.0
 
 - Make `LocalFilePrefMixin` implement `ValueNotifier`

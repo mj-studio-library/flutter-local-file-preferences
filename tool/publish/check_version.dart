@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:yaml/yaml.dart';
 
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_local_variable
 
 void main(List<String> args) {
   print(args);
