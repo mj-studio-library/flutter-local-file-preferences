@@ -111,7 +111,14 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        defaultLanguage: 'dart'
       },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        }
+      }
     }),
 };
 

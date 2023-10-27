@@ -1,8 +1,9 @@
 ---
 sidebar_position: 0
+title: Getting Started
 ---
 
-# Introduction
+# Getting Started
 
 ## Flutter Local File Preferences 
 
